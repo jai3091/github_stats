@@ -33,8 +33,9 @@ find_repo_details(){
     cd ${repo_name}
     repo_commit_date="$(git log -1 --format=%cd)"
     repo_commit_name="$(git log -1 --format=%cn)"
-    echo -e "\e[34mINFO :$LINENO: Name of Repository,Last Commit Date,Latest Author \e[0m";
-    echo -e "\e[32mINFO :$LINENO: ${repo_name},${repo_commit_date},${repo_commit_name} \e[0m";
+    repo_clone_url=https://github.com/${git_repo_name}.git
+    echo -e "\e[34mINFO :$LINENO: Name of Repository,Clone URL,Last Commit Date,Latest Author \e[0m";
+    echo -e "\e[32mINFO :$LINENO: ${repo_name},${repo_clone_url},${repo_commit_date},${repo_commit_name}
     rm -rf ../${repo_name}
   else
     echo -e "\e[31mERROR :$LINENO:  https://github.com/${repo_name} repository is not available. Please enter a valid repository!! \e[0m \n";
