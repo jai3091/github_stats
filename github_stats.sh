@@ -32,7 +32,7 @@ find_repo_details(){
     git clone --depth=1 -n https://github.com/${git_repo_name}.git
     cd ${repo_name}
     repo_commit_date="$(git log -1 --format=%cd)"
-    repo_commit_name="$(git log -1 --format=%cn)"
+    repo_commit_name="$(git log -1 | grep "Author" | awk -F ':' '{print $2}')"
     repo_clone_url=https://github.com/${git_repo_name}.git
     echo -e "\e[34mINFO :$LINENO: Name of Repository,Clone URL,Last Commit Date,Latest Author \e[0m";
     echo -e "\e[32mINFO :$LINENO: ${repo_name},${repo_clone_url},${repo_commit_date},${repo_commit_name}
