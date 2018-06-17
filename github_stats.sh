@@ -27,7 +27,6 @@ get_repo_name (){
 find_repo_details(){
   if [[ "$(curl -I -s https://github.com/${git_repo_name} | awk NR==1 | awk '{print $2}')" == "200" ]]; then
     echo -e "\e[34mINFO :$LINENO: Valid Git Repository \e[0m";
-    #echo -e "\e[34mINFO :$LINENO: Finding repository name \e[0m";
     repo_name="$(echo $git_repo_name | awk -F'/' '{print $2}')"
     git clone --depth=1 -n https://github.com/${git_repo_name}.git
     cd ${repo_name}
@@ -35,7 +34,7 @@ find_repo_details(){
     repo_commit_name="$(git log -1 | grep "Author" | awk -F ':' '{print $2}')"
     repo_clone_url=https://github.com/${git_repo_name}.git
     echo -e "\e[34mINFO :$LINENO: Name of Repository,Clone URL,Last Commit Date,Latest Author \e[0m";
-    echo -e "\e[32mINFO :$LINENO: ${repo_name},${repo_clone_url},${repo_commit_date},${repo_commit_name}
+    echo -e "\e[32mINFO :$LINENO: ${repo_name},${repo_clone_url},${repo_commit_date},${repo_commit_name} \e[0m";
     rm -rf ../${repo_name}
   else
     echo -e "\e[31mERROR :$LINENO:  https://github.com/${repo_name} repository is not available. Please enter a valid repository!! \e[0m \n";
