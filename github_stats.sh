@@ -15,7 +15,7 @@ set_env(){
 get_repo_name (){
   echo -e "\e[34mINFO :$LINENO: Please enter the git repo name in this format kubernetes/charts \e[0m";
   read git_repo_name;
-  if [[ $git_repo_name =~ ([A-Za-z]+)(/)([A-Za-z]) ]]; then
+  if [[ $git_repo_name =~ ([A-Za-z0-9]+)(/)([A-Za-z0-9]) ]]; then
     find_repo_details
   else
     echo -e "\e[31mERROR :$LINENO: Please enter the git repo name in this format kubernetes/charts \e[0m";
@@ -37,8 +37,6 @@ find_repo_details(){
     echo -e "\e[34mINFO :$LINENO: Name of Repository,Clone URL,Last Commit Date,Latest Author \e[0m";
     echo -e "\e[32mINFO :$LINENO: ${repo_name},${repo_clone_url},${repo_commit_date},${repo_commit_name}
     rm -rf ../${repo_name}
-    echo -e "\e[34mINFO :$LINENO: Stopping exited container \e[0m";
-    docker rm $(docker ps -a -q)
   else
     echo -e "\e[31mERROR :$LINENO:  https://github.com/${repo_name} repository is not available. Please enter a valid repository!! \e[0m \n";
   fi
